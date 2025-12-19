@@ -1,0 +1,17 @@
+body {
+    background-color: rgb(236, 239, 251);
+    margin: 0px;
+}
+
+nav {
+    background-color: rgb(87, 152, 242);
+    padding: 0px;
+}
+
+#mocktail-img {
+    padding: 5px;
+    border: 5px, solid rgb(0, 0, 0);
+    height: 250px;
+    width: 250px;
+}
+
