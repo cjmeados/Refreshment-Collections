@@ -9,7 +9,7 @@ app.get('/test', (req, res) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`Server is running on https://localhost://${PORT}`);
+    console.log(`Server is running on http://localhost:${PORT}`);
 });
 
 app.get('/api/drink/random', (req, res) => {
