@@ -9,17 +9,8 @@ async function randomDrinkFetcher() {
       
     randomDrinkContent.innerHTML = '';
 
-    
-
-
-
-};
-
-function findHowManyFields(data) {
-    
-    
-    
-
+    const drinkName = document.createElement('h2');
+    drinkName.textContent = data.name;
+    randomDrinkContent.appendChild(drinkName);
 
 }
-

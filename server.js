@@ -17,38 +17,25 @@ app.listen(PORT, () => {
 
 app.get('/api/drink/random', async (req, res) => {
 
-    const url = "https://www.thecocktaildb.com/api/json/v1/1/random.php";
+    const url = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Non_Alcoholic";
 
     try {
         
         const response = await fetch(url);
         const data = await response.json();
-        
-        const drink = data.drinks[0];
 
-        const ingredientsAndProportions = [];
-        for (let i = 1; i <= 15; i++) {
-            if (drink["strIngredient" + i]) {
-                ingredientsAndProportions.push({
-                    ingredient: drink["strIngredient" + i],
-                    measure: drink["strMeasure" + i] || ""
-                });
-            }
-        }
+        const drinks = data.drinks;
+
+        console.log("All drinks:", drinks); // debug
 
         const payload = {
-            name: drink.strDrink,
-            alcoholic: drink.strAlcoholic,
-            glass: drink.strGlass,
-            instructions: drink.strInstructions,
-            thumbnail: drink.strDrinkThumb,
-            ingredientsAndProportions: ingredientsAndProportions
-        }
+            name: drinks[0].strDrink
+        };
 
         res.status(200).json(payload);
 
     } catch (err) {
-        res.status(500).json({error: "Could not fetch drink."});
+        res.status(500).json({error: "Could not fetch database."});
     }
 
 });
