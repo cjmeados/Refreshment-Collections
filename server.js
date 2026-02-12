@@ -26,11 +26,25 @@ app.get('/api/drink/random', async (req, res) => {
 
         const drinks = data.drinks;
 
-        console.log("All drinks:", drinks); // debug
+        const lengthOfList = drinks.length;
+
+        const i = Math.floor(Math.random() * (lengthOfList));
+
+        const firstPayload = {
+            id: drinks[i].idDrink
+        };
+
+        const urlForSpecificDrink = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${firstPayload.id}`;
+
+        const response2 = await fetch(urlForSpecificDrink);
+        const dataOfSpecificDrink = await response2.json();
+
+        const specificDrink = dataOfSpecificDrink.drinks[0];
 
         const payload = {
-            name: drinks[0].strDrink
-        };
+            name: specificDrink.strDrink
+        }
+
 
         res.status(200).json(payload);
 
@@ -39,3 +53,13 @@ app.get('/api/drink/random', async (req, res) => {
     }
 
 });
+
+
+// currently it fetches the first drink from na drinks. 
+// I could fetch na drinks, then length of drinks, 
+// then a random one from it.
+// once a random one is grabbed, I could hit that api ID link
+
+// then parse
+// then put on front end
+// then style
