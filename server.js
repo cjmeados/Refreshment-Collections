@@ -41,12 +41,39 @@ app.get('/api/drink/random', async (req, res) => {
 
         const specificDrink = dataOfSpecificDrink.drinks[0];
 
-        const payload = {
-            name: specificDrink.strDrink
+        
+        // I want to run through fields Im interested in and if they have non null
+        // I'll add it to payload. 
+        
+        // make a quick little note for img url
+
+        const ingredientArray = [];
+        const measureArray = [];
+
+        let index = 1;
+        
+        while (specificDrink[`strIngredient${index}`] != null) {
+            ingredientArray.push(specificDrink[`strIngredient${index}`]);
+            index++;
+        }
+
+        index = 1;
+
+        while (specificDrink[`strMeasure${index}`] != null) {
+            measureArray.push(specificDrink[`strMeasure${index}`]);
+            index++;
+        }
+        
+        const secondPayload = {
+            name: specificDrink.strDrink,
+            glass: specificDrink.strGlass,
+            instructions: specificDrink.strInstructions, // make a language translator later
+            ingredients: ingredientArray,
+            measures: measureArray
         }
 
 
-        res.status(200).json(payload);
+        res.status(200).json(secondPayload);
 
     } catch (err) {
         res.status(500).json({error: "Could not fetch database."});
