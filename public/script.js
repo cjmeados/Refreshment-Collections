@@ -10,7 +10,21 @@ async function randomDrinkFetcher() {
     randomDrinkContent.innerHTML = '';
 
     const drinkName = document.createElement('h2');
+    const glassDrinkGoesIn = document.createElement('h3');
+    const instructions = document.createElement('p');
+    
+
+    let amountOfIngredients = data.ingredients.length;
+    let amountOfMeasures = data.measures.length;
+
+    instructions.textContent = data.instructions;
+    glassDrinkGoesIn.textContent = data.glass;
     drinkName.textContent = data.name;
+
     randomDrinkContent.appendChild(drinkName);
+    randomDrinkContent.appendChild(glassDrinkGoesIn);
+    randomDrinkContent.appendChild(instructions);
 
 }
+
+
